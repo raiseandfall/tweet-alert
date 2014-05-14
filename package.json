@@ -1,0 +1,31 @@
+{
+  "name": "tweet-alert",
+  "version": "0.0.0",
+  "description": "Tweet Alert",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/raiseandfall/tweet-alert.git"
+  },
+  "author": "Matthieu COLLE",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/raiseandfall/tweet-alert/issues"
+  },
+  "homepage": "https://github.com/raiseandfall/tweet-alert",
+  "dependencies": {
+    "johnny-five": "^0.7.33"
+  },
+  "devDependencies": {
+    "gulp": "^3.6.2",
+    "gulp-uglify": "^0.3.0",
+    "gulp-notify": "^1.2.5",
+    "gulp-concat": "^2.2.0",
+    "gulp-jshint": "^1.5.5",
+    "gulp-nodemon": "^1.0.2",
+    "jshint-stylish": "^0.2.0"
+  }
+}
