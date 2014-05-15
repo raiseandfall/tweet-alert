@@ -1,7 +1,7 @@
 tweet-alert
 ===========
 
-A simple Arduino/NodeJS installation who turns a LED on when somebody tweets.
+A simple Arduino/NodeJS installation who triggers something when somebody tweets. e.g. flashing a led, etc... 
 
 Uses [Johnny-five](https://github.com/rwaldron/johnny-five) & [user-stream](https://github.com/aivis/user-stream) for Twitter streaming API.
 
@@ -18,11 +18,17 @@ $ gulp dev
 
 ## BASIC EXAMPLE
 
+This example flashes a LED every 250ms for 15s when a specific user has tweeted.
+
 ```javascript
-var tweetAlert = require('./src/tweet-alert');
+var tweetAlert = require('./src/tweet-alert'),
+    five = require('johnny-five'),
+    app,
+    board = new five.Board(),
+    led;
 
 // Init
-var app = new tweetAlert({
+app = new tweetAlert({
   consumer_key: 'xxxxxxxxxxxxxxxx',
   consumer_secret: 'xxxxxxxxxxxxxxxx',
   access_token_key: 'xxxxxxxxxxxxxxxx',
@@ -30,12 +36,23 @@ var app = new tweetAlert({
   screen_name: 'HuffingtonPost'
 });
 
-// Start to track
-app.track();
+// Wait for the board to be ready
+board.on('ready', function() {
+	led = new five.Led(13);
+  led.off();
 
-// Triggered when new tweet
-app.on('tweet', function(data) {
-  console.log('New Tweet :: ', data.text, ' by ', data.user);
+  // Start to track
+  app.track();
+
+  // Listen to tweet alert
+  app.on('tweet', function(data) {
+    console.log('New Tweet :: ', data.text, ' by ', data.user);
+  
+    led.strobe(250);
+    setTimeout(function() {
+    	led.off();
+    }, 15000);
+  });
 });
 ```
 
