@@ -17,7 +17,10 @@
   },
   "homepage": "https://github.com/raiseandfall/tweet-alert",
   "dependencies": {
-    "johnny-five": "^0.7.33"
+    "johnny-five": "^0.7.33",
+    "user-stream": "0.0.7",
+    "events": "^1.0.1",
+    "util": "^0.10.3"
   },
   "devDependencies": {
     "gulp": "^3.6.2",
@@ -26,9 +29,6 @@
     "gulp-concat": "^2.2.0",
     "gulp-jshint": "^1.5.5",
     "gulp-nodemon": "^1.0.2",
-    "jshint-stylish": "^0.2.0",
-    "user-stream": "0.0.7",
-    "events": "^1.0.1",
-    "util": "^0.10.3"
+    "jshint-stylish": "^0.2.0"
   }
 }
