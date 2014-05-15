@@ -52,12 +52,12 @@ TweetAlert.prototype.track = function() {
 
   // Error handler
   stream.on('error', function(data) {
-  	console.log('stream error : ', data);
+    console.log('stream error : ', data);
   });
 
   // Called when data is received
   stream.on('data', function(json) {
-  	// Filter by user
+    // Filter by user
     if (json.user) {
       if (!screenNameFilter || (json.user.screen_name === screenNameFilter)) {
         tweetAlert.emit('tweet', {
