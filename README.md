@@ -13,12 +13,14 @@ $ npm install
 $ gulp dev
 ```
 
-### Arduino
-![Breadboard](bb.png) 
-
 ## BASIC EXAMPLE
 
 This example flashes a LED every 250ms for 15s when a specific user has tweeted.
+
+#### Arduino
+![Breadboard](bb.png) 
+
+#### JS
 
 ```javascript
 var tweetAlert = require('./src/tweet-alert'),
