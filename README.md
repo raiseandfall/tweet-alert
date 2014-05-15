@@ -10,7 +10,7 @@ Uses [Johnny-five](https://github.com/rwaldron/johnny-five) & [user-stream](http
 ```shell
 $ git clone git@github.com:raiseandfall/tweet-alert.git && cd tweet-alert
 $ npm install
-$ gulp dev
+$ node index.js
 ```
 
 ## BASIC EXAMPLE
