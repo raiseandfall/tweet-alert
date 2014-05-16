@@ -39,7 +39,7 @@ app = new TweetAlert({
 
 // Wait for the board to be ready
 board.on('ready', function() {
-	led = new five.Led(13);
+  led = new five.Led(13);
   led.off();
 
   // Start to track
@@ -82,7 +82,7 @@ $ gulp build
 
 #### Events
 - ```tweet``` - fired when new tweet streamed. Sends back a data object :
-```JSON
+```javascript
 {
     text: 'Tweet',
     user: 'screen_name',
