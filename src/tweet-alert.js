@@ -47,12 +47,17 @@ TweetAlert.prototype.track = function() {
 
   // Called when stream connected
   stream.on('connected', function() {
-    console.log('stream connected');
+    tweetAlert.emit('connected');
+  });
+
+  // Called stream closed
+  stream.on('close', function() {
+    tweetAlert.emit('close');
   });
 
   // Error handler
   stream.on('error', function(data) {
-    console.log('stream error : ', data);
+    tweetAlert.emit('error', data);
   });
 
   // Called when data is received
@@ -68,6 +73,15 @@ TweetAlert.prototype.track = function() {
       }
     }
   });
+};
+
+TweetAlert.prototype.untrack = function() {
+
+  if (stream) {
+    stream.destroy();
+    stream = null;
+  }
+
 };
 
 module.exports = TweetAlert;
