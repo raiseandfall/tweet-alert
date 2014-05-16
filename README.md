@@ -1,7 +1,7 @@
 tweet-alert
 ===========
 
-A simple Arduino/NodeJS installation who triggers something when somebody tweets. e.g. flashing a led, etc... 
+A simple Arduino/NodeJS installation who triggers something when somebody tweets. e.g. flashing a led, etc...
 
 Uses [Johnny-five](https://github.com/rwaldron/johnny-five) & [user-stream](https://github.com/aivis/user-stream) for Twitter streaming API.
 
@@ -18,19 +18,19 @@ $ node index.js
 This example flashes a LED every 250ms for 15s when a specific user has tweeted.
 
 #### Arduino
-![Breadboard](bb.png) 
+![Breadboard](bb.png)
 
 #### JS
 
 ```javascript
-var tweetAlert = require('./src/tweet-alert'),
+var TweetAlert = require('./src/tweet-alert'),
     five = require('johnny-five'),
     app,
     board = new five.Board(),
     led;
 
 // Init
-app = new tweetAlert({
+app = new TweetAlert({
   consumer_key: 'xxxxxxxxxxxxxxxx',
   consumer_secret: 'xxxxxxxxxxxxxxxx',
   access_token_key: 'xxxxxxxxxxxxxxxx',
@@ -49,7 +49,7 @@ board.on('ready', function() {
   // Listen to tweet alert
   app.on('tweet', function(data) {
     console.log('New Tweet :: ', data.text, ' by ', data.user);
-  
+
     led.strobe(250);
     setTimeout(function() {
     	led.off();
@@ -70,4 +70,30 @@ $ gulp build
 
 ## API
 
-Coming soon.
+#### Configuration
+- ```consumer_key``` - `String` - Twitter app consumer key
+- ```consumer_secret``` - `String` - Twitter app consumer secret
+- ```access_token_key``` - `String` - Twitter app access token key
+- ```access_token_secret``` - `String` - Twitter app access tokensecret
+- ```screen_name``` - `String` - Twitter screen name to filter
+
+#### Methods
+- ```track``` - starts tracking Twitter account
+- ```untrack``` - stops tracking; closes Twitter stream
+
+#### Events
+- ```tweet``` - fired when new tweet streamed. Sends back a data object :
+```JSON
+{
+    text: 'Tweet',
+    user: 'screen_name',
+    id: '123456'
+}
+```
+
+- ```close``` - fired when Twitter Stream connection has closed
+- ```error``` - fired when error has occured
+
+
+## License
+MIT
