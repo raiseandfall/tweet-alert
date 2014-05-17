@@ -85,7 +85,8 @@ $ gulp build
 ```javascript
 {
     text: 'Tweet',
-    user: 'screen_name',
+    screen_name: 'screen_name',
+    name: 'Firstname Lastname',
     id: '123456'
 }
 ```
