@@ -34,7 +34,7 @@ app = new TweetAlert({
   consumer_secret: 'xxxxxxxxxxxxxxxx',
   access_token_key: 'xxxxxxxxxxxxxxxx',
   access_token_secret: 'xxxxxxxxxxxxxxxx',
-  screen_name: 'HuffingtonPost'
+  screen_name: ['kexp', 'rue89']
 });
 
 // Wait for the board to be ready
@@ -74,7 +74,7 @@ $ gulp build
 - ```consumer_secret``` - `String` - Twitter app consumer secret
 - ```access_token_key``` - `String` - Twitter app access token key
 - ```access_token_secret``` - `String` - Twitter app access tokensecret
-- ```screen_name``` - `String` - Twitter screen name to filter
+- ```screen_name``` - `String|Array` - Twitter screen name(s) to filter. Can be an empty string (all the users followed = this entire feed), one user or an array of users.
 
 #### Methods
 - ```track``` - starts tracking Twitter account

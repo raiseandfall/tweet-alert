@@ -27,6 +27,7 @@ function TweetAlert(opts) {
 //inherit
 util.inherits(TweetAlert, events.EventEmitter);
 
+
 TweetAlert.prototype.track = function() {
 
   var tweetAlert = this;
@@ -40,8 +41,8 @@ TweetAlert.prototype.track = function() {
   }
 
   // If user specific
-  var screenNameFilter = this.opts.screen_name || false;
-  
+  this.filteredScreenName = this.opts.screen_name || false;
+
   // Start the stream
   stream.stream();
 
@@ -64,16 +65,38 @@ TweetAlert.prototype.track = function() {
   stream.on('data', function(json) {
     // Filter by user
     if (json.user) {
-      if (!screenNameFilter || (json.user.screen_name === screenNameFilter)) {
+      // Filter data
+      if (tweetAlert.isTracked(json)) {
         tweetAlert.emit('tweet', {
           text: json.text,
-          user: json.user.screen_name,
+          screen_name: json.user.screen_name,
+          name: json.user.name,
           id: json.user.id
         });
       }
     }
   });
 };
+
+
+TweetAlert.prototype.isTracked = function(data) {
+  if (!this.filteredScreenName) {
+    return true;
+  }
+
+  if (typeof this.filteredScreenName === 'string') {
+    if (this.filteredScreenName === data.user.screen_name) {
+      return true;
+    }
+  } else if (Object.prototype.toString.call(this.filteredScreenName) === '[object Array]') {
+    if (this.filteredScreenName.indexOf(data.user.screen_name) !== -1) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
 
 TweetAlert.prototype.untrack = function() {
 
