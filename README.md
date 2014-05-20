@@ -74,7 +74,7 @@ $ gulp build
 - ```consumer_secret``` - `String` - Twitter app consumer secret
 - ```access_token_key``` - `String` - Twitter app access token key
 - ```access_token_secret``` - `String` - Twitter app access tokensecret
-- ```screen_name``` - `String|Array` - Twitter screen name(s) to filter. Can be an empty string (all the users followed = this entire feed), one user or an array of users.
+- ```screen_name``` - `String|Array` - Twitter screen name(s) to filter. Can be an empty string (all the users followed = your entire Twitter feed), one user or an array of users.
 
 #### Methods
 - ```track``` - starts tracking Twitter account
