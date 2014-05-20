@@ -57,6 +57,11 @@ board.on('ready', function() {
 });
 ```
 
+## TWEET READER EXAMPLE
+
+[Source code](https://github.com/raiseandfall/tweet-alert/blob/master/example.js).
+
+
 ## CONTRIBUTE
 
 ```shell
