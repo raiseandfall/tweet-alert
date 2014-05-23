@@ -10,13 +10,7 @@ var tweetAlert = require('./src/tweet-alert'),
     led;
 
 board = new five.Board();
-app = new tweetAlert({
-  consumer_key: config.consumer_key,
-  consumer_secret: config.consumer_secret,
-  access_token_key: config.access_token_key,
-  access_token_secret: config.access_token_secret,
-  screen_name: config.screen_name
-});
+app = new tweetAlert(config);
 
 // Wait for the board to be ready
 board.on('ready', function() {
@@ -49,6 +43,11 @@ board.on('ready', function() {
     setTimeout(function() {
       sh.run('say \"' + cleanedTweet + '\"');
     }, 1000);
+
+    // Open url in browser
+    if (data.url) {
+      sh.run('open -a "Google Chrome.app" ' + data.url);
+    }
   });
   
   app.on('error', function(data) {

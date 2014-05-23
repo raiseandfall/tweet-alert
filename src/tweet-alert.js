@@ -10,7 +10,6 @@ var Stream = require('user-stream'),
     stream;
 
 function TweetAlert(opts) {
-
   if (!(this instanceof TweetAlert)) {
     return new TweetAlert(opts);
   }
@@ -21,7 +20,6 @@ function TweetAlert(opts) {
 
   // New Twitter Stream
   stream = new Stream(opts);
-
 }
 
 //inherit
@@ -29,7 +27,6 @@ util.inherits(TweetAlert, events.EventEmitter);
 
 
 TweetAlert.prototype.track = function() {
-
   var tweetAlert = this;
 
   // If missing parameters
@@ -67,12 +64,20 @@ TweetAlert.prototype.track = function() {
     if (json.user) {
       // Filter data
       if (tweetAlert.isTracked(json)) {
-        tweetAlert.emit('tweet', {
+        var tw = {
           text: json.text,
           screen_name: json.user.screen_name,
           name: json.user.name,
           id: json.user.id
-        });
+        };
+
+        if (json.entities.urls) {
+          if (Object.prototype.toString.call(json.entities.urls) === '[object Array]') {
+            tw.url = json.entities.urls[0].expanded_url;
+          }
+        }
+
+        tweetAlert.emit('tweet', tw);
       }
     }
   });
@@ -99,12 +104,10 @@ TweetAlert.prototype.isTracked = function(data) {
 
 
 TweetAlert.prototype.untrack = function() {
-
   if (stream) {
     stream.destroy();
     stream = null;
   }
-
 };
 
 module.exports = TweetAlert;
