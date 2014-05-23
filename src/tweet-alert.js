@@ -73,7 +73,9 @@ TweetAlert.prototype.track = function() {
 
         if (json.entities.urls) {
           if (Object.prototype.toString.call(json.entities.urls) === '[object Array]') {
-            tw.url = json.entities.urls[0].expanded_url;
+            if (json.entities.urls.length > 0) {
+              tw.url = json.entities.urls[0].expanded_url;
+            }
           }
         }
 
